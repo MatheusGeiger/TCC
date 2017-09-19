@@ -20,16 +20,22 @@
           <div class="gn-scroller">
             <ul class="gn-menu">
               <li>
-                <a class="gn-icon gn-icon-viagem">Viagem</a>
+                <a class="gn-icon gn-icon-viagem" href="/viagem">Viagem</a>
               </li>
-              <li><a class="gn-icon gn-icon-ocorrencias">Ocorrências</a></li>
+              <li><a class="gn-icon gn-icon-ocorrencias" href="/ocorrencia">Ocorrências</a></li>
             </ul>
           </div><!-- /gn-scroller -->
         </nav>
       </li>
       <li></li>
       <li>
-        <a class="gn-icon gn-icon-login" href="#">Login</a>
+        {% if user.is_authenticated %}
+        <a class="gn-icon gn-icon-login" href="/logout">Logout</a>
+        <span>{{ user.username }}</span>
+        {% else %}
+        <a class="gn-icon gn-icon-login" href="/login">login</a>
+        <span>{{ user.username }}</span>
+        {% endif %}
       </li>
     </ul>
   </div><!-- /container -->

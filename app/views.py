@@ -11,6 +11,9 @@ def index(request):
 def viagem(request):
     return render(request, 'index_viagem.html')
 
+def ocorrencia(request):
+    return render(request, 'index_ocorrencia.html')
+
 def db(request):
     greeting = Greeting()
     greeting.save()
