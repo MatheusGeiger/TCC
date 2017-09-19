@@ -75,3 +75,11 @@ box-shadow: none;
   display: block;
 	margin-top: 12px;
 }
+@media screen and (max-width: 422px) {
+	.container-login{
+		margin:auto;
+		max-width: 300px;
+		padding-top: 25px;
+		transform: none;
+	}
+}
