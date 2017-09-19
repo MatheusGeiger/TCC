@@ -235,12 +235,12 @@ input.gn-search:focus {
 }
 
 .gn-icon-auth::before {
-		content: "circle-left";
+		content: "switch";
 		width: 32px;
 }
 
 .gn-icon-ocorrencias::before{
-	content: "\e901";
+	content: "paste";
 }
 
 /* if an icon anchor has a span, hide the span */

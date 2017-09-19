@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
-
-{% block title %}See you!{% endblock %}
-
+{%block header %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="../static/css/login.css" />
+{% endblock %}
+{% block title %}Login{% endblock %}
+{%block menu%}
+{{block.super}}
+{%endblock%}
 {% block content %}
-  <h2>Logged out</h2>
-  <p>You have been successfully logged out.</p>
-  <p><a href="{% url 'login' %}">Log in</a> again.</p>
+<div class="container-logout">
+  <div class="login-screen">
+    <div class="app-title">
+      <h1>Logged out efetuado com sucesso</h1>
+    </div>
+  </div>
+</div>
 {% endblock %}

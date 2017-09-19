@@ -4,7 +4,7 @@ ul.errorlist.nonfield{
 p {
   margin: 0 5px 10px;
 }
-.container-login{
+.container-login, .container-logout{
 	margin:auto;
 	max-width: 300px;
 	transform: translatey(50%);
@@ -80,6 +80,12 @@ box-shadow: none;
 		margin:auto;
 		max-width: 300px;
 		padding-top: 25px;
+		transform: none;
+	}
+	.container-logout{
+		margin:auto;
+		max-width: 300px;
+		padding-top: 80px;
 		transform: none;
 	}
 }
