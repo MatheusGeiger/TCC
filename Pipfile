@@ -9,6 +9,7 @@ gunicorn = "*"
 psycopg2 = "*"
 whitenoise = "*"
 requests = "*"
+ipdb = "*"
 
 [requires]
 python_version = "3.6"
