@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% block header %}
 <title>Eagle Eye</title>
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -11,7 +12,9 @@
   <script src="../static/js/modernizr.custom.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+{% endblock %}
 <body>
+  {%block menu%}
   <div class="container">
     <ul id="gn-menu" class="gn-menu-main">
       <li class="gn-trigger">
@@ -44,6 +47,7 @@
   <script>
     new gnMenu( document.getElementById( 'gn-menu' ) );
   </script>
+{% endblock %}
 {% block content %}{% endblock %}
 
 </body>
