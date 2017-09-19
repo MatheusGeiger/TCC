@@ -226,17 +226,23 @@ input.gn-search:focus {
 }
 
 .gn-icon-viagem::before {
-		content: "\e9b0"
+		content: "truck"
 }
 
 .gn-icon-login::before {
-		content: "\e971";
+		content: "user";
+		width: 32px;
+}
+
+.gn-icon-auth::before {
+		content: "circle-left";
 		width: 32px;
 }
 
 .gn-icon-ocorrencias::before{
-	content: "\e92d";
+	content: "\e901";
 }
+
 /* if an icon anchor has a span, hide the span */
 
 .gn-icon span {
@@ -284,6 +290,7 @@ input.gn-search:focus {
 		height: 60px
 }
 
+
 @media screen and (max-width: 422px) {
 	.gn-menu-wrapper.gn-open-all {
 			-webkit-transform: translateX(0px);
@@ -295,4 +302,10 @@ input.gn-search:focus {
 	.gn-menu-wrapper.gn-open-all .gn-scroller {
 			width: 130%
 	}
+	a.gn-icon.gn-icon-login {
+	    margin: 0px;
+	    padding: 0px;
+	    padding-right: 5px;
+	}
+
 }
