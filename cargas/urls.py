@@ -3,14 +3,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 
-import motorista.views
+import app.views
 
 # Examples:
 # url(r'^$', 'gettingstarted.views.home', name='home'),
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^$', motorista.views.index, name='index'),
-    url(r'^db', motorista.views.db, name='db'),
+    url(r'^$', app.views.index, name='index'),
+    url(r'^viagem/$', app.views.viagem, name='viagem'),
+    url(r'^db', app.views.db, name='db'),
     url(r'^admin/', include(admin.site.urls)),
 ]
