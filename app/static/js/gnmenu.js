@@ -4,12 +4,12 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
 ;( function( window ) {
-	
+
 	'use strict';
 
 	// http://stackoverflow.com/a/11381730/989439
@@ -19,7 +19,12 @@
 		return check;
 	}
 
-	function gnMenu( el, options ) {	
+	function gnMenu( el, options ) {
+		this.el = el;
+		this._init();
+	}
+
+	function gnMenuRight( el, options ) {
 		this.el = el;
 		this._init();
 	}
@@ -44,10 +49,10 @@
 			if( !mobilecheck() ) {
 				this.trigger.addEventListener( 'mouseover', function(ev) { self._openIconMenu(); } );
 				this.trigger.addEventListener( 'mouseout', function(ev) { self._closeIconMenu(); } );
-			
+
 				this.menu.addEventListener( 'mouseover', function(ev) {
-					self._openMenu(); 
-					document.addEventListener( self.eventtype, self.bodyClickFn ); 
+					self._openMenu();
+					document.addEventListener( self.eventtype, self.bodyClickFn );
 				} );
 			}
 			this.trigger.addEventListener( this.eventtype, function( ev ) {
@@ -86,7 +91,72 @@
 		}
 	}
 
+	gnMenuRight.prototype = {
+		_init : function() {
+			this.trigger = this.el.querySelector( 'a.gn-icon-menu-right' );
+			this.menu = this.el.querySelector( 'nav.gn-menu-wrapper-right' );
+			this.isMenuOpen = false;
+			this.eventtype = mobilecheck() ? 'touchstart' : 'click';
+			this._initEvents();
+
+			var self = this;
+			this.bodyClickFn = function() {
+				self._closeMenu();
+				this.removeEventListener( self.eventtype, self.bodyClickFn );
+			};
+		},
+		_initEvents : function() {
+			var self = this;
+
+			if( !mobilecheck() ) {
+				this.trigger.addEventListener( 'mouseover', function(ev) { self._openIconMenu(); } );
+				this.trigger.addEventListener( 'mouseout', function(ev) { self._closeIconMenu(); } );
+
+				this.menu.addEventListener( 'mouseover', function(ev) {
+					self._openMenu();
+					document.addEventListener( self.eventtype, self.bodyClickFn );
+				} );
+			}
+			this.trigger.addEventListener( this.eventtype, function( ev ) {
+				ev.stopPropagation();
+				ev.preventDefault();
+				if( self.isMenuOpen ) {
+					self._closeMenu();
+					document.removeEventListener( self.eventtype, self.bodyClickFn );
+				}
+				else {
+					self._openMenu();
+					document.addEventListener( self.eventtype, self.bodyClickFn );
+				}
+			} );
+			this.menu.addEventListener( this.eventtype, function(ev) { ev.stopPropagation(); } );
+		},
+		_openIconMenu : function() {
+			classie.add( this.menu, 'gn-open-part-right' );
+			classie.add( this.menu, 'gn-open-show-menu' );
+		},
+		_closeIconMenu : function() {
+			classie.remove( this.menu, 'gn-open-part-right' );
+			classie.remove( this.menu, 'gn-open-show-menu' );
+		},
+		_openMenu : function() {
+			if( this.isMenuOpen ) return;
+			classie.add( this.trigger, 'gn-selected' );
+			this.isMenuOpen = true;
+			classie.add( this.menu, 'gn-open-show-menu-click' );
+			this._closeIconMenu();
+		},
+		_closeMenu : function() {
+			if( !this.isMenuOpen ) return;
+			classie.remove( this.trigger, 'gn-selected' );
+			this.isMenuOpen = false;
+			classie.remove( this.menu, 'gn-open-show-menu-click' );
+			this._closeIconMenu();
+		}
+	}
+
 	// add to global namespace
 	window.gnMenu = gnMenu;
+	window.gnMenuRight = gnMenuRight;
 
 } )( window );

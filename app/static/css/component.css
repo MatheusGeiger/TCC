@@ -73,6 +73,15 @@
 		-ms-user-select: none;
 		user-select: none;
 }
+.gn-menu-main li.gn-trigger-right {
+		position: relative;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+}
 
 .gn-menu-main > li:last-child {
 		float: right;
@@ -109,12 +118,27 @@
 		-moz-transition: -moz-transform 0.3s, width 0.3s;
 		transition: transform 0.3s, width 0.3s;
 }
+.gn-menu-wrapper-right {
+		top: 60px;
+		bottom: 0;
+		right: 0;
+		overflow: hidden;
+		width: 60px;
+		border-top: 1px solid #c6d0da;
+		background: white;
+		visibility: hidden;
+}
 
 .gn-scroller {
 		position: absolute;
 		overflow-y: scroll;
 		width: 370px;
 		height: 100%;
+}
+.gn-scroller-right {
+	position: absolute;
+	overflow-y: scroll;
+	width: 100%;
 }
 
 .gn-menu {
@@ -226,21 +250,24 @@ input.gn-search:focus {
 }
 
 .gn-icon-viagem::before {
-		content: "truck"
+		content: "\e90a";
 }
 
 .gn-icon-login::before {
-		content: "user";
+		content: "\e907";
 		width: 32px;
 }
 
 .gn-icon-auth::before {
-		content: "switch";
-		width: 32px;
+		content: "\e90b";
 }
 
 .gn-icon-ocorrencias::before{
-	content: "paste";
+	content: "\e902";
+}
+
+.gn-icon-notifica::before{
+	content: "\e903";
 }
 
 /* if an icon anchor has a span, hide the span */
@@ -274,7 +301,14 @@ input.gn-search:focus {
 }
 
 /* styles for opening menu */
-
+.gn-open-show-menu{
+	visibility: visible;
+	border: 0
+}
+.gn-open-show-menu-click{
+	visibility: visible;
+	border: 0;
+}
 .gn-menu-wrapper.gn-open-all,
 .gn-menu-wrapper.gn-open-part {
 		-webkit-transform: translateX(0px);
