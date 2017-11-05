@@ -1,9 +1,25 @@
 {% extends "base.html" %}
-
 {% block content %}
 <div class="container-full">
-<p>AQUI é a HOME de VIAGEM</p>
+{% for viagem in viagem %}
+    <div class="container-card">
+      <div class="description-card">
+        <div id="map-thumb"></div>
+          <p><label>Codigo Viagem:</label> {{ viagem.cd_viagem }}</p>
+          {% if viagem.cd_motorista_viagem is not none %}
+            <p><label>Motorista Viagem: </label> {{viagem.cd_motorista_viagem}}</p>
+          {% else %}
+            <p class="warning"><label>Motorista Viagem: </label> Motorista não definido *</p>
+          {% endif %}
+          <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
+          <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>
+          <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
+          <p><label>Fim Viagem: </label> {{ viagem.data_fim_viagem }}</p>
+          <a href="/viagem/{{viagem.cd_viagem}}"><div class="ver_viagem"> Ver Viagem</div></a>
+          <div class="ver_ocorrencia">Ver Ocorrencia</div>
+      </div>
+    </div>
+{% endfor %}
 
 </div>
-
 {% endblock %}

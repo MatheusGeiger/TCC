@@ -2,8 +2,17 @@
 
 {% block content %}
 <div class="container-full">
-<p>AQUI é a HOME de OCORRENCIA</p>
+{% for ocorrencia in ocorrencia %}
+    <div class="container-card">
+      <div class="description-card">
+        <p><label>Codigo Ocorrencia:</label> {{ ocorrencia.cd_ocorrencia }}</p>
+        <p><label>Descricao Ocorrencia: </label> {{ ocorrencia.ds_ocorrencia }}</p>
+        <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia }}</p>
+        <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia }}</p>
+      </div>
 
+    </div>
+{% endfor %}
 </div>
 
 {% endblock %}

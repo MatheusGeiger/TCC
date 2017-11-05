@@ -10,6 +10,7 @@ psycopg2 = "*"
 whitenoise = "*"
 requests = "*"
 ipdb = "*"
+simplejson = "*"
 
 [requires]
 python_version = "3.6"

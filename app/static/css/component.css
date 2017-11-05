@@ -27,6 +27,7 @@
 		font-weight: 300;
 		font-family: 'Lato', Arial, sans-serif;
 		line-height: 60px;
+		z-index: 9;
 }
 
 .gn-menu-main {
@@ -266,9 +267,32 @@ input.gn-search:focus {
 	content: "\e902";
 }
 
-.gn-icon-notifica::before{
+.gn-icon-mensagem::before{
 	content: "\e903";
 }
+
+.gn-icon-notifica::before{
+	content: "\ea55";
+	width: auto;
+	position: absolute;
+	left: 8px;
+  top: 70px;
+	color: red;
+	background: red;
+  border-radius: 50px;
+}
+
+.gn-icon-notifica-nome::before{
+	content: "\ea55";
+	width: auto;
+	position: absolute;
+	right: 38px;
+	top: 15px;
+	color: red;
+	background: red;
+  border-radius: 50px;
+}
+
 
 /* if an icon anchor has a span, hide the span */
 
