@@ -7,9 +7,9 @@
         <div id="map-thumb"></div>
           <p><label>Codigo Viagem:</label> {{ viagem.cd_viagem }}</p>
           {% if viagem.cd_motorista_viagem is not none %}
-            <p><label>Motorista Viagem: </label> {{viagem.cd_motorista_viagem}}</p>
+            <p><label>Motorista: </label> {{viagem.cd_motorista_viagem}}</p>
           {% else %}
-            <p class="warning"><label>Motorista Viagem: </label> Motorista não definido *</p>
+            <p class="warning"><label>Motorista: </label> Motorista não definido *</p>
           {% endif %}
           <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
           <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>

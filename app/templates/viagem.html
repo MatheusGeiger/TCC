@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% autoescape on %}
 <div class="container-full">
     <div class="container-card-unit">
       <div class="description-card-unit">
           <p><label>Codigo Viagem:</label> {{ viagem.cd_viagem }}</p>
           {% if viagem.cd_motorista_viagem is not none %}
-            <p><label>Motorista Viagem: </label> {{viagem.cd_motorista_viagem}}</p>
+            <p><label>Motorista: </label> {{viagem.cd_motorista_viagem}}</p>
           {% else %}
-            <p class="warning"><label>Motorista Viagem: </label> Motorista não definido *</p>
+            <p class="warning"><label>Motorista: </label> Motorista não definido *</p>
           {% endif %}
           <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
           <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>
           <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
           <p><label>Fim Viagem: </label> {{ viagem.data_fim_viagem }}</p>
+          {% for ocorrencia in ocorrencia %}
+          <p><label>Descricao Ocorrencia: </label> {{ ocorrencia.ds_ocorrencia}}</p>
+          <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia}}</p>
+          <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia}}</p>
+          {% endfor %}
       </div>
       <div id="map"></div>
-
     </div>
 </div>
 <script>
@@ -36,13 +41,13 @@
         directionsService.route({
           origin: '{{ viagem.origem_viagem }}',
           destination: '{{ viagem.destino_viagem }}',
-          waypoints: [{location:'rua omacha'}],
+          waypoints: {{location|safe}},
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
           } else {
-            window.alert('Directions request failed due to ' + status);
+            console.log('Directions request failed due to ' + status);
           }
         });
       }
@@ -50,4 +55,5 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC4a11g-stHdlMa7F89GlytBEWQ09Ww_o&callback=initMap">
     </script>
+{% endautoescape %}
 {% endblock %}

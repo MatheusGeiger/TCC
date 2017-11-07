@@ -67,19 +67,6 @@ class ViagemAdmin(admin.ModelAdmin):
         'data_fim_viagem'
     ]
 
-class ViagemOcorrenciaAdmin(admin.ModelAdmin):
-
-    list_display = (
-        'cd_viagem_ocorrencia',
-        'cd_viagem',
-        'cd_ocorrencia'
-    )
-    search_fields = [
-        'cd_viagem_ocorrencia',
-        'cd_viagem',
-        'cd_ocorrencia'
-    ]
-
 class NotificacaoOcorrenciaAdmin(admin.ModelAdmin):
 
     list_display = (
@@ -95,5 +82,4 @@ admin.site.register(Veiculo, VeiculoAdmin)
 admin.site.register(Motorista, MotoristaAdmin)
 admin.site.register(Ocorrencia, OcorrenciaAdmin)
 admin.site.register(Viagem, ViagemAdmin)
-admin.site.register(ViagemOcorrencia, ViagemOcorrenciaAdmin)
 admin.site.register(NotificacaoOcorrencia, NotificacaoOcorrenciaAdmin)

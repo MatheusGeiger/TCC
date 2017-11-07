@@ -1,5 +1,7 @@
+# encoding: utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from .models import *
 import requests
 import simplejson
@@ -11,7 +13,15 @@ def index(request):
 
 def viagem(request,id_viagem):
     viagem = Viagem.objects.get(cd_viagem=id_viagem)
-    return render(request, 'viagem.html', {'viagem' : viagem})
+    ocorrencia = Ocorrencia.objects.all().filter(cd_viagem=id_viagem)
+    lista = ocorrencia.values_list()
+    location = [{'location': lista[2].encode('utf8')} for lista in lista]
+    context = {
+        'viagem' : viagem,
+        'ocorrencia' : ocorrencia,
+        'location' : location
+    }
+    return render_to_response('viagem.html', context)
 
 def ocorrencia(request):
     return render(request, 'index_ocorrencia.html')

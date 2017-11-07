@@ -54,29 +54,6 @@ class Motorista(models.Model):
         verbose_name = 'Motorista'
         verbose_name_plural = 'Motoristas'
 
-class Ocorrencia(models.Model):
-
-    cd_ocorrencia = models.AutoField(
-        primary_key=True
-    )
-    ds_ocorrencia = models.CharField(
-        max_length=100
-    )
-    local_ocorrencia = models.CharField(
-        max_length=100
-    )
-    data_ocorrencia = models.DateTimeField(
-        null=True,
-        blank=True
-    )
-
-    def __unicode__(self):
-        return str(self.cd_ocorrencia) or ''
-
-    class Meta:
-        verbose_name = 'Ocorrencia'
-        verbose_name_plural = 'Ocorrencias'
-
 class Viagem(models.Model):
 
     cd_viagem = models.AutoField(
@@ -96,8 +73,16 @@ class Viagem(models.Model):
         null=True,
         blank=True
     )
-    status_viagem = models.BooleanField(default=False)
     status_ocorrencia = models.BooleanField(default=False)
+    status_viagem = models.CharField(
+        max_length=64,
+        choices=(
+            ('finalizada', 'Finalizada'),
+            ('em_andamento', 'Em Andamento'),
+            ('nao_iniciada', 'Nao Iniciada')
+        ),
+        default='nao_iniciada'
+    )
     cd_motorista_viagem = models.ForeignKey(
         Motorista,
         null=True,
@@ -111,28 +96,33 @@ class Viagem(models.Model):
         verbose_name = 'Viagem'
         verbose_name_plural = 'Viagens'
 
-class ViagemOcorrencia(models.Model):
+class Ocorrencia(models.Model):
 
-    cd_viagem_ocorrencia = models.AutoField(
+    cd_ocorrencia = models.AutoField(
         primary_key=True
+    )
+    ds_ocorrencia = models.CharField(
+        max_length=100
+    )
+    local_ocorrencia = models.CharField(
+        max_length=100
+    )
+    data_ocorrencia = models.DateTimeField(
+        null=True,
+        blank=True
     )
     cd_viagem = models.ForeignKey(
         Viagem,
-        null=False,
-        blank=False
-    )
-    cd_ocorrencia = models.ForeignKey(
-        Ocorrencia,
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
 
     def __unicode__(self):
-        return str(self.cd_viagem_ocorrencia) or ''
+        return str(self.cd_ocorrencia) or ''
 
     class Meta:
-        verbose_name = 'Viagem Ocorrencia'
-        verbose_name_plural = 'Viagem e Ocorrencias'
+        verbose_name = 'Ocorrencia'
+        verbose_name_plural = 'Ocorrencias'
 
 class NotificacaoOcorrencia(models.Model):
 
