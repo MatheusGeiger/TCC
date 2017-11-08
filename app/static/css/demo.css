@@ -185,7 +185,6 @@ body {
 		text-align: right;
 	}
 }
-
 @media screen and (max-width: 768px) {
 	.container-full{
 		margin-top: 69px;
@@ -194,8 +193,13 @@ body {
 		width: 100%;
 	}
 	.container-card{
-		width: 46%;
+		width: 96%;
 	}
+}
+@media screen and (max-width: 768px) and (min-width:750px){
+.container-card {
+    width: 46%;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 740px) {
