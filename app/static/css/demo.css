@@ -53,8 +53,8 @@ body {
   margin-left: 16px;
   background: #34495e;
   color: #ffffff;
-	height: 40px;
 	padding-top: 9px;
+	height: 40px;
 }
 .ver_ocorrencia{
 	float: right;;
@@ -65,8 +65,8 @@ body {
 	text-align: center;
 	margin-bottom: 10px;
 	margin-right: 16px;
-	height: 40px;
 	padding-top: 9px;
+	height: 40px;
 }
 .container > header,
 .codrops-top {
