@@ -23,19 +23,18 @@ body {
 }
 .container-full{
 	margin-top: 69px;
-	margin-left: 69px;
+	padding: 10px 20px;
 }
 
 .container-card{
-	width: 320px;
 	background-color: #fff;
 	float: left;
-  margin: 10px;
+  margin: 8px;
 	border-radius: 5px;
 }
 .container-card-unit{
 	background-color: #fff;
-	width: 84%;
+	width: 100%;
 	border-radius: 5px;
 }
 .description-card{
@@ -189,20 +188,21 @@ body {
 @media screen and (max-width: 768px) {
 	.container-full{
 		margin-top: 69px;
-    margin-left: 44px;
 	}
 	.container-card-unit{
-		width: 93%;
+		width: 100%;
+	}
+	.container-card{
+		width: 96%
 	}
 }
 
 @media screen and (max-width: 740px) {
 	.container-full{
 		margin-top: 69px;
-    margin-left: 20px;
 	}
 	.container-card-unit{
-		width: 95%;
+		width: 100%;
 	}
 	.codrops-icon span {
 		display: none;
