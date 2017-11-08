@@ -5,6 +5,8 @@ from django.shortcuts import render_to_response
 from .models import *
 import requests
 import simplejson
+from __future__ import unicode_literals
+
 
 # Create your views here.
 
