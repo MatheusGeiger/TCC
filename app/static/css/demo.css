@@ -194,7 +194,7 @@ body {
 		width: 100%;
 	}
 	.container-card{
-		width: 96%;
+		width: 46%;
 	}
 }
 
@@ -204,6 +204,9 @@ body {
 	}
 	.container-card-unit{
 		width: 100%;
+	}
+	.container-card{
+		width: 96%;
 	}
 	.codrops-icon span {
 		display: none;
