@@ -12,12 +12,62 @@
 
 body {
 	background: #34495e;
+	font-family: 'Lato', Arial, sans-serif;
 }
-
+#map {
+  height: 400px;
+  width: 100%;
+ }
+.warning{
+	 color: red;
+}
 .container-full{
-	margin:69px;
+	margin-top: 69px;
+	padding: 10px 20px;
 }
 
+.container-card{
+	background-color: #fff;
+	float: left;
+  margin: 8px;
+	border-radius: 5px;
+	min-width: 300px;
+}
+.container-card-unit{
+	background-color: #fff;
+	width: 100%;
+	border-radius: 5px;
+}
+.description-card{
+	padding: 5px;
+}
+.description-card-unit{
+	padding: 5px;
+}
+.ver_viagem{
+	float: left;
+  width: 125px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-left: 16px;
+  background: #34495e;
+  color: #ffffff;
+	padding-top: 9px;
+	height: 40px;
+}
+.ver_ocorrencia{
+	float: right;;
+	width: 125px;
+	background: #34495e;
+  color: #ffffff;
+	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-right: 16px;
+	padding-top: 9px;
+	height: 40px;
+}
 .container > header,
 .codrops-top {
 	color: #fff;
@@ -139,9 +189,33 @@ body {
 		text-align: right;
 	}
 }
+@media screen and (max-width: 768px) {
+	.container-full{
+		margin-top: 69px;
+	}
+	.container-card-unit{
+		width: 100%;
+	}
+	.container-card{
+		width: 96%;
+	}
+}
+@media screen and (max-width: 768px) and (min-width:750px){
+.container-card {
+    width: 46%;
+    margin-left: 20px;
+}
 
 @media screen and (max-width: 740px) {
-
+	.container-full{
+		margin-top: 69px;
+	}
+	.container-card-unit{
+		width: 100%;
+	}
+	.container-card{
+		width: 96%;
+	}
 	.codrops-icon span {
 		display: none;
 	}

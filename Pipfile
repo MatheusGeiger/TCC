@@ -11,6 +11,7 @@ whitenoise = "*"
 requests = "*"
 ipdb = "*"
 simplejson = "*"
+django-suit = "*"
 
 [requires]
 python_version = "2.7"

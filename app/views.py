@@ -1,7 +1,6 @@
 # encoding: utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
 from .models import *
 import requests
 import simplejson
@@ -22,7 +21,7 @@ def viagem(request,id_viagem):
         'ocorrencia' : ocorrencia,
         'location' : location
     }
-    return render_to_response('viagem.html', context)
+    return render(request, 'viagem.html', context)
 
 def ocorrencia(request):
     return render(request, 'index_ocorrencia.html')
