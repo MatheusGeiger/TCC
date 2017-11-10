@@ -44,13 +44,20 @@ body {
 .description-card-unit{
 	padding: 5px;
 }
+.warningtrue{
+	position: absolute;
+  color: red;
+  background: red;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+}
 .ver_viagem{
 	float: left;
-  width: 125px;
+  width: 100%;
   border-radius: 5px;
   text-align: center;
   margin-bottom: 10px;
-  margin-left: 16px;
   background: #34495e;
   color: #ffffff;
 	padding-top: 9px;

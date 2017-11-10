@@ -15,8 +15,13 @@
           <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>
           <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
           <p><label>Fim Viagem: </label> {{ viagem.data_fim_viagem }}</p>
+          <p><label>Status Viagem: </label> {{ viagem.status_viagem }}</p>
+          {% if viagem.status_ocorrencia == True %}
+          <p><label>Status Ocorrencia: </label> Possui Ocorrencia <span class="warningtrue"></span></p>
+          {% else %}
+          <p class="warningfalse"><label>Status Ocorrencia: </label> Sem Ocorrencias</p>
+          {% endif %}
           <a href="/viagem/{{viagem.cd_viagem}}"><div class="ver_viagem"> Ver Viagem</div></a>
-          <div class="ver_ocorrencia">Ver Ocorrencia</div>
       </div>
     </div>
 {% endfor %}

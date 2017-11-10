@@ -6,7 +6,6 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -22,14 +21,14 @@ TEST_RUNNER = 'cargas.heroku_test_runner.HerokuDiscoverRunner'
 # Application definition
 
 INSTALLED_APPS = (
+    'app',
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'app'
+    'django.contrib.staticfiles'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,8 +80,12 @@ TEMPLATES = [
     },
 ]
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'EAGLE EYE'
+    'ADMIN_NAME': 'EAGLE EYE',
+    'HEADER_DATE_FORMAT' :  'l, j F Y ' ,
+    ' HEADER_TIME_FORMAT ' :  ' H: i ' ,
 }
+
+TEMPLATE_DIRS =["app/templates"]
 
 WSGI_APPLICATION = 'cargas.wsgi.application'
 

@@ -1,9 +1,5 @@
 from django.db import models
 
-# Create your models here.
-class Greeting(models.Model):
-    when = models.DateTimeField('date created', auto_now_add=True)
-
 class Veiculo(models.Model):
 
     placa_veiculo = models.CharField(
@@ -77,9 +73,9 @@ class Viagem(models.Model):
     status_viagem = models.CharField(
         max_length=64,
         choices=(
+            ('nao_iniciada', 'Nao Iniciada'),
             ('finalizada', 'Finalizada'),
-            ('em_andamento', 'Em Andamento'),
-            ('nao_iniciada', 'Nao Iniciada')
+            ('em_andamento', 'Em Andamento')
         ),
         default='nao_iniciada'
     )
