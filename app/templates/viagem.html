@@ -11,8 +11,11 @@
           {% else %}
             <p class="warning"><label>Motorista: </label> Motorista não definido *</p>
           {% endif %}
-          <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
           <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>
+          {% if viagem.status_viagem == 'nao_iniciada' %}
+          <p class="warning"><label></label> Viagem não Iniciada*</p>
+          {% else %}
+          <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
           <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
           <p><label>Fim Viagem: </label> {{ viagem.data_fim_viagem }}</p>
           {% for ocorrencia in ocorrencia %}
@@ -20,6 +23,8 @@
           <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia}}</p>
           <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia}}</p>
           {% endfor %}
+          {% endif %}
+
       </div>
       <div id="map"></div>
     </div>
