@@ -250,6 +250,18 @@ input.gn-search:focus {
 		-webkit-font-smoothing: antialiased;
 }
 
+.gn-icon-veiculo::before{
+	content: "\e98d";
+}
+.gn-icon-veiculos::before{
+	content: "\e98e";
+}
+.gn-icon-motoristas::before{
+	content: "\e908";
+}
+.gn-icon-motorista::before{
+	content: "\e907" ;
+}
 .gn-icon-viagem::before {
 		content: "\e90a";
 }
@@ -292,7 +304,10 @@ input.gn-search:focus {
 	background: red;
   border-radius: 50px;
 }
+.gn-nova-viagem::before{
+	content: "\e90e"
 
+}
 
 /* if an icon anchor has a span, hide the span */
 

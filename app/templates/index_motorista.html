@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-full" style="padding:0px">
+{% for motorista in motorista %}
+    <div class="container-card">
+      <div class="description-card">
+        <p><label>Nome Motorista:</label> {{ motorista.nome_motorista }}</p>
+        <p><label>CPF Motorista: </label> {{ motorista.cpf_motorista }}</p>
+        <p><label>Placa Veiculo Ocorrencia: </label> {{ motorista.placa_veiculo }}</p>
+      </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

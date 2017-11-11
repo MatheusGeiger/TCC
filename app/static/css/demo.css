@@ -21,11 +21,15 @@ body {
 .warning{
 	 color: red;
 }
+.container-add{
+	max-width: 700px;
+  margin: auto;
+  padding-top: 69px;
+}
 .container-full{
 	margin-top: 69px;
 	padding: 10px 20px;
 }
-
 .container-card{
 	background-color: #fff;
 	float: left;
@@ -74,6 +78,16 @@ body {
 	margin-right: 16px;
 	padding-top: 9px;
 	height: 40px;
+}
+input#id_status_ocorrencia {
+	max-width: 20px;
+}
+select{
+	text-align: center;
+  background-color: #ECF0F1;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  height: 30px;
 }
 .container > header,
 .codrops-top {
@@ -212,6 +226,7 @@ body {
     width: 46%;
     margin-left: 20px;
 }
+}
 
 @media screen and (max-width: 740px) {
 	.container-full{
@@ -226,5 +241,9 @@ body {
 	.codrops-icon span {
 		display: none;
 	}
-
+	.container-add{
+		max-width: 300px;
+		margin: auto;
+		padding-top: 69px;
+	}
 }
