@@ -76,6 +76,8 @@ class Viagem(models.Model):
         primary_key=True
     )
     origem_viagem = models.CharField(
+        null=True,
+        blank=True,
         max_length=100
     )
     destino_viagem = models.CharField(
@@ -101,8 +103,8 @@ class Viagem(models.Model):
     )
     cd_motorista_viagem = models.ForeignKey(
         Motorista,
-        null=True,
-        blank=True
+        null=False,
+        blank=False
     )
 
     def __unicode__(self):

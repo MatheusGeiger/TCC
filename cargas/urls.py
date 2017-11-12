@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^lista_veiculo/$', app.views.lista_veiculo, name='lista_veiculo'),
     url(r'^veiculo/add_veiculo/$', app.views.add_veiculo, name='add_veiculo'),
     url(r'^lista_ocorrencia/$', app.views.lista_ocorrencia, name='lista_ocorrencia'),
+    url(r'^insere_ocorrencia/(?P<id_viagem>[A-Za-z0-9-\/]+)/(?P<local_ocorrencia>[A-Za-z0-9-\/]+)/$', app.views.insere_ocorrencia, name='insere_ocorrencia'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),

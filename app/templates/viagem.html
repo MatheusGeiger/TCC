@@ -24,8 +24,11 @@
           <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia}}</p>
           {% endfor %}
           {% endif %}
-
       </div>
+      {% if viagem.status_viagem == 'nao_iniciada' %}
+        <a href="/viagem/{{viagem.cd_viagem}}"><div class="ver_viagem iniciar"> Iniciar Viagem</div></a>
+      {% else %}
+      {% endif %}
       <div id="map"></div>
     </div>
 </div>

@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 import requests
 import simplejson
+import datetime
 from django.http import HttpResponseRedirect
 
 
@@ -25,6 +26,24 @@ def lista_ocorrencia(request):
 
 def ocorrencia(request):
     return render(request, 'index_ocorrencia.html')
+
+def insere_ocorrencia(request,id_viagem,local_ocorrencia):
+    viagem = Viagem.objects.get(cd_viagem=id_viagem)
+    if viagem.status_viagem == 'nao_iniciada':
+        msg='ocorrencia nao registrada, viagem nao iniciada'
+        return HttpResponse(msg)
+    else:
+        ocorrencia = Ocorrencia()
+        import ipdb; ipdb.set_trace()
+        ocorrencia.id_viagem = id_viagem
+        ocorrencia.local_ocorrencia = local_ocorrencia
+        ocorrencia.data_ocorrencia = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        ocorrencia.save()
+        viagem = Viagem.objects.get(cd_viagem=id_viagem)
+        viagem.status_ocorrencia = True
+        viagem.save()
+        msg='ocorrencia registrada'
+        return HttpResponse(msg)
 
 def viagem(request,id_viagem):
     if request.user.is_authenticated():
@@ -76,7 +95,7 @@ def add_motorista(request):
             if form.is_valid():
                 motorista = form.save(commit=False)
                 motorista.save()
-                return redirect('/motorista/%s' % motorista.pk)
+                return redirect('/lista_motorista')
         else:
             form = AddMotorista()
     else:
@@ -97,7 +116,7 @@ def add_veiculo(request):
             if form.is_valid():
                 veiculo = form.save(commit=False)
                 veiculo.save()
-                return redirect('/veiculo/%s' % veiculo.pk)
+                return redirect('/lista_veiculo')
         else:
             form = AddVeiculo()
     else:

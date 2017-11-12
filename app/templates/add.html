@@ -2,13 +2,43 @@
 {%block header %}
 {{block.super}}
 <link rel="stylesheet" type="text/css" href="/static/css/add.css" />
+{% if form.Meta.name == 'Motorista' %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#id_cpf_motorista").addClass('masked');
+  $("#id_cpf_motorista").attr("placeholder","XXX.XXX.XXX-XX");
+});
+</script>
+<style>
+span#id_cpf_motoristaMask {
+    display: none;
+}
+</style>
+{% else %}
+{% endif %}
+{% if form.Meta.name == 'Veiculo' %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#id_placa_veiculo").addClass('masked');
+  $("#id_placa_veiculo").attr("placeholder","XXX-XXXX");
+});
+</script>
+<style>
+span#id_placa_veiculoMask {
+    display: none;
+}
+</style>
+{% else %}
+{% endif %}
 {% endblock %}
-{% block title %}Adicionar Viagem{% endblock %}
+{% block title %}Cadastrar{{form.Meta.name}}{% endblock %}
 {% block content %}
 <div class="container-add">
   <div class="login-screen">
     <div class="app-title">
-      <h1>Cadastrar Viagem</h1>
+      <h1>Cadastrar {{form.Meta.name}}</h1>
     </div>
     <form method="post">
       {% csrf_token %}
@@ -17,4 +47,10 @@
   </form>
   </div>
 </div>
+{% if form.Meta.name == 'Viagem' %}
+{%else%}
+<script>
+$(document).ready(function(){var e={maskedInputs:document.querySelectorAll(".masked"),maskedNumber:"XdDmMyY9",maskedLetter:"_",init:function(){e.setUpMasks(e.maskedInputs),e.maskedInputs=document.querySelectorAll(".masked"),e.activateMasking(e.maskedInputs)},setUpMasks:function(t){var a,r=t.length;for(a=0;a<r;a++)e.createShell(t[a])},createShell:function(e){var t="",a=e.getAttribute("placeholder");e.setAttribute("maxlength",a.length),e.setAttribute("data-placeholder",a),e.removeAttribute("placeholder"),t='<span class="shell"><span aria-hidden="true" id="'+e.id+'Mask"><i></i>'+a+"</span>"+e.outerHTML+"</span>",e.outerHTML=t},setValueOfMask:function(e){var t=e.target.value;return"<i>"+t+"</i>"+e.target.getAttribute("data-placeholder").substr(t.length)},activateMasking:function(t){var a,r;for(a=0,r=t.length;a<r;a++)e.maskedInputs[a].addEventListener?e.maskedInputs[a].addEventListener("keyup",function(t){e.handleValueChange(t)},!1):e.maskedInputs[a].attachEvent&&e.maskedInputs[a].attachEvent("onkeyup",function(t){t.target=t.srcElement,e.handleValueChange(t)})},handleValueChange:function(t){var a=t.target.getAttribute("id");switch(t.keyCode){case 20:case 17:case 18:case 16:case 37:case 38:case 39:case 40:case 9:return}document.getElementById(a).value=e.handleCurrentValue(t),document.getElementById(a+"Mask").innerHTML=e.setValueOfMask(t)},handleCurrentValue:function(t){var a,r,n,s,u,i=t.target.getAttribute("data-charset"),l=i||t.target.getAttribute("data-placeholder"),d=t.target.value,c=l.length,g="";for(u=i?d.replace(/\W/g,""):d.replace(/\D/g,""),a=0,r=0;a<c;a++){n=!isNaN(parseInt(u[r]));if(s=!!u[r]&&u[r].match(/[A-Z]/i),matchesNumber=e.maskedNumber.indexOf(l[a])>=0,matchesLetter=e.maskedLetter.indexOf(l[a])>=0,matchesNumber&&n||i&&matchesLetter&&s)g+=u[r++];else{if(!i&&!n&&matchesNumber||i&&(matchesLetter&&!s||matchesNumber&&!n))return g;g+=l[a]}if(void 0==u[r])break}return t.target.getAttribute("data-valid-example")?e.validateProgress(t,g):g},validateProgress:function(e,t){var a=e.target.getAttribute("data-valid-example"),r=new RegExp(e.target.getAttribute("pattern")),n=e.target.getAttribute("data-placeholder"),s=t.length,u="";if(1==s&&"MM"==n.toUpperCase().substr(0,2))return t>1&&t<10&&(t="0"+t),t;for(i=s;i>=0;i--){if(u=t+a.substr(t.length),r.test(u))return t;t=t.substr(0,t.length-1)}return t},errorOnKeyEntry:function(){}};e.init()});
+</script>
+{%endif%}
 {% endblock %}

@@ -54,8 +54,8 @@ class ViagemAdmin(admin.ModelAdmin):
 
     list_display = (
         'cd_viagem',
-        'origem_viagem',
         'destino_viagem',
+        'origem_viagem',
         'data_inicio_viagem',
         'data_fim_viagem',
         'cd_motorista_viagem'
