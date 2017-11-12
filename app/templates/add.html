@@ -23,6 +23,8 @@ span#id_cpf_motoristaMask {
 $(document).ready(function(){
   $("#id_placa_veiculo").addClass('masked');
   $("#id_placa_veiculo").attr("placeholder","XXX-XXXX");
+  $("#id_placa_veiculo").attr("data-charset","___-XXXX");
+  $("#id_placa_veiculo").attr("pattern","\w\w\w \d\d\d");
 });
 </script>
 <style>
