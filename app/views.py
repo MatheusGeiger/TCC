@@ -34,7 +34,6 @@ def insere_ocorrencia(request,id_viagem,local_ocorrencia):
         return HttpResponse(msg)
     else:
         ocorrencia = Ocorrencia()
-        import ipdb; ipdb.set_trace()
         ocorrencia.id_viagem = id_viagem
         ocorrencia.local_ocorrencia = local_ocorrencia
         ocorrencia.data_ocorrencia = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
