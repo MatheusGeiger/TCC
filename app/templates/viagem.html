@@ -2,6 +2,23 @@
 
 {% block content %}
 {% autoescape on %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="overlay"></div>
+    <div class="popup">
+        <h2>Ops.. </br>{{ message }}</h2>
+        <a class="close" onclick="fechapopup()">×</a>
+        <div class="content">
+        </div>
+    </div>
+    <script>
+    function fechapopup() {
+      $(".popup").remove();
+      $(".overlay").remove();
+    }
+    </script>
+    {% endfor %}
+{% endif %}
 <div class="container-full">
     <div class="container-card-unit">
       <div class="description-card-unit">
@@ -26,19 +43,37 @@
           {% endif %}
       </div>
       {% if viagem.status_viagem == 'nao_iniciada' %}
-        <a href="/viagem/{{viagem.cd_viagem}}"><div class="ver_viagem iniciar"> Iniciar Viagem</div></a>
+        <a id='iniciar_viagem' href="#"><div class="ver_viagem iniciar"> Iniciar Viagem</div></a>
       {% else %}
       {% endif %}
       <div id="map"></div>
     </div>
 </div>
 <script>
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+
+      function success(pos) {
+        var crd = pos.coords;
+        $('#iniciar_viagem').attr('href','/viagem/iniciar_viagem/{{viagem.cd_viagem}}/'+crd.latitude+'/'+crd.longitude+'/');
+        console.log(crd.latitude);
+        console.log(crd.longitude);
+      };
+
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      };
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
-          center: {lat: 41.85, lng: -87.65}
+          center: {lat: -23.6815315, lng:-46.8754941}
         });
         directionsDisplay.setMap(map);
 
@@ -47,15 +82,20 @@
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
-          origin: '{{ viagem.origem_viagem }}',
-          destination: '{{ viagem.destino_viagem }}',
+          {%if viagem.status_viagem == 'nao_iniciada'%}
+            origin: '{{ viagem.destino_viagem }}',
+            destination: '{{ viagem.destino_viagem }}',
+          {%else%}
+            origin: '{{ viagem.origem_viagem }}',
+            destination: '{{ viagem.destino_viagem }}',
+          {%endif%}
           waypoints: {{location|safe}},
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
           } else {
-            console.log('Directions request failed due to ' + status);
+            console.log('Erro: ' + status);
           }
         });
       }

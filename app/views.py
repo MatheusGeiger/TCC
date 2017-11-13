@@ -1,14 +1,15 @@
-# encoding: utf-8
+# -*- coding:utf-8 -*-
 from django.contrib import admin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from .controllers import *
 import requests
 import simplejson
 import datetime
 from django.http import HttpResponseRedirect
-
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -43,6 +44,21 @@ def insere_ocorrencia(request,id_viagem,local_ocorrencia):
         viagem.save()
         msg='ocorrencia registrada'
         return HttpResponse(msg)
+
+def iniciar_viagem(request,id_viagem,latitude,longitude):
+    viagem = Viagem.objects.all().filter(status_viagem='em_andamento')
+    if (viagem.count() >= 1) :
+        messages.error(request, 'Temos uma outra viagem em andamento...')
+        return HttpResponseRedirect('/viagem/%s' % id_viagem)
+    else:
+        address_origem = ControlerGetAddress(latitude,longitude)
+        viagem = Viagem.objects.get(cd_viagem=id_viagem)
+        viagem.origem_viagem = address_origem
+        viagem.status_viagem = 'em_andamento'
+        viagem.data_inicio_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        viagem.save()
+        msg='ocorrencia registrada'
+    return HttpResponse(msg)
 
 def viagem(request,id_viagem):
     if request.user.is_authenticated():
