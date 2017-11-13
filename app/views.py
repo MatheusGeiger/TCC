@@ -57,8 +57,8 @@ def iniciar_viagem(request,id_viagem,latitude,longitude):
         viagem.status_viagem = 'em_andamento'
         viagem.data_inicio_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         viagem.save()
-        msg='ocorrencia registrada'
-    return HttpResponse(msg)
+        messages.success(request, 'Viagem Iniciada registrada')
+    return HttpResponseRedirect('/viagem/%s' % id_viagem)
 
 def viagem(request,id_viagem):
     if request.user.is_authenticated():
