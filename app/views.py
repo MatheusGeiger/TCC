@@ -28,27 +28,29 @@ def lista_ocorrencia(request):
 def ocorrencia(request):
     return render(request, 'index_ocorrencia.html')
 
-def insere_ocorrencia(request,id_viagem,local_ocorrencia):
+def insere_ocorrencia(request, id_viagem, latitude, longitude):
     viagem = Viagem.objects.get(cd_viagem=id_viagem)
     if viagem.status_viagem == 'nao_iniciada':
         msg='ocorrencia nao registrada, viagem nao iniciada'
-        return HttpResponse(msg)
+        return False
     else:
+        local_ocorrencia = ControlerGetAddress(latitude,longitude)
         ocorrencia = Ocorrencia()
-        ocorrencia.id_viagem = id_viagem
+        ocorrencia.cd_viagem_id = id_viagem
         ocorrencia.local_ocorrencia = local_ocorrencia
+        ocorrencia.ds_ocorrencia = 'Porta aberta'
         ocorrencia.data_ocorrencia = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         ocorrencia.save()
         viagem = Viagem.objects.get(cd_viagem=id_viagem)
         viagem.status_ocorrencia = True
         viagem.save()
         msg='ocorrencia registrada'
-        return HttpResponse(msg)
+        return True
 
 def iniciar_viagem(request,id_viagem,latitude,longitude):
     viagem = Viagem.objects.all().filter(status_viagem='em_andamento')
     if (viagem.count() >= 1) :
-        messages.error(request, 'Temos uma outra viagem em andamento...')
+        messages.error(request, 'Ops ! Temos uma outra viagem em andamento...')
         return HttpResponseRedirect('/viagem/%s' % id_viagem)
     else:
         address_origem = ControlerGetAddress(latitude,longitude)
@@ -57,8 +59,47 @@ def iniciar_viagem(request,id_viagem,latitude,longitude):
         viagem.status_viagem = 'em_andamento'
         viagem.data_inicio_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         viagem.save()
-        messages.success(request, 'Viagem Iniciada registrada')
+        messages.success(request, 'Viagem Iniciada. ')
     return HttpResponseRedirect('/viagem/%s' % id_viagem)
+
+def finalizar_viagem(request,id_viagem,latitude,longitude):
+    viagem = Viagem.objects.get(cd_viagem=id_viagem)
+    destino = viagem.destino_viagem
+    distancia_valida = ControlerGetDistance(destino,latitude,longitude)
+    if distancia_valida:
+        viagem.status_viagem = 'finalizada'
+        viagem.data_fim_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        viagem.save()
+        messages.success(request, 'Viagem Finalizada. ')
+        return HttpResponseRedirect('/viagem/%s' % id_viagem)
+    else:
+        messages.error(request, 'Não foi possivel finalizar a Viagem, caminhão não chegou ao destino')
+        return HttpResponseRedirect('/viagem/%s' % id_viagem)
+
+def insere_coordenada(request,latitude,longitude,status_porta):
+    try:
+        viagem = Viagem.objects.filter(status_viagem='em_andamento').get()
+    except:
+        return HttpResponse(status=204)
+
+    if viagem.length == 0:
+        return HttpResponse(status=204)
+    else:
+        coordenada = CoordenadasVeiculo()
+        coordenada.latitude = latitude
+        coordenada.longitude = longitude
+        if int(status_porta) == 0:
+            coordenada.status_porta = 0
+            coordenada.cd_viagem = viagem.pk
+            coordenada.save()
+        else:
+            coordenada.status_porta = 1
+            coordenada.cd_viagem_id= viagem.pk
+            coordenada.save()
+            id_viagem = viagem.pk
+            insere_ocorrencia(request,id_viagem,latitude,longitude)
+        return HttpResponse(status=200)
+
 
 def viagem(request,id_viagem):
     if request.user.is_authenticated():
@@ -72,6 +113,17 @@ def viagem(request,id_viagem):
             'location' : location
         }
         return render(request, 'viagem.html', context)
+    else:
+        return HttpResponseRedirect('/login/?next=%s' % request.path)
+
+def cancelar_viagem(request,id_viagem):
+    if request.user.is_authenticated():
+        viagem = Viagem.objects.get(cd_viagem=id_viagem)
+        viagem.status_viagem = 'cancelada'
+        viagem.data_fim_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        viagem.save()
+        messages.success(request, 'Viagem Cancelada. ')
+        return HttpResponseRedirect('/viagem/%s' % id_viagem)
     else:
         return HttpResponseRedirect('/login/?next=%s' % request.path)
 

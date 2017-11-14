@@ -97,7 +97,8 @@ class Viagem(models.Model):
         choices=(
             ('nao_iniciada', 'Nao Iniciada'),
             ('finalizada', 'Finalizada'),
-            ('em_andamento', 'Em Andamento')
+            ('em_andamento', 'Em Andamento'),
+            ('cancelada', 'Cancelada')
         ),
         default='nao_iniciada'
     )
@@ -159,3 +160,28 @@ class NotificacaoOcorrencia(models.Model):
     class Meta:
         verbose_name = 'Notificacao'
         verbose_name_plural = 'Notificacoes'
+
+class CoordenadasVeiculo(models.Model):
+
+    cd_coordenada = models.AutoField(
+        primary_key=True
+    )
+    latitude = models.CharField(
+        max_length=100
+    )
+    longitude = models.CharField(
+        max_length=100
+    )
+    porta_aberta = models.BooleanField(default=False)
+    cd_viagem = models.ForeignKey(
+        Viagem,
+        null=False,
+        blank=False
+    )
+
+    def __unicode__(self):
+        return str(self.cd_coordenada) or ''
+
+    class Meta:
+        verbose_name = 'Coordenada'
+        verbose_name_plural = 'Coordenadas'

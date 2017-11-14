@@ -6,7 +6,7 @@
     {% for message in messages %}
     <div class="overlay"></div>
     <div class="popup">
-        <h2>Ops.. </br>{{ message }}</h2>
+        <h2>{{ message }}</h2>
         <a class="close" onclick="fechapopup()">×</a>
         <div class="content">
         </div>
@@ -19,6 +19,7 @@
     </script>
     {% endfor %}
 {% endif %}
+<div id="loading" class="loading"></div>
 <div class="container-full">
     <div class="container-card-unit">
       <div class="description-card-unit">
@@ -32,9 +33,20 @@
           {% if viagem.status_viagem == 'nao_iniciada' %}
           <p class="warning"><label></label> Viagem não Iniciada*</p>
           {% else %}
+            {% if viagem.status_viagem == 'cancelada' %}
+            <p class="warning"><label>Status Viagem:</label> Viagem Cancelada*</p>
+            {% else %}
+            {% endif %}
+            {% if viagem.status_viagem == 'em_andamento' %}
+            <p class="alertviagem"><label>Status Viagem:</label> Viagem Em Andamento</p>
+            {% else %}
+            {% endif %}
           <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
           <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
+          {% if viagem.status_viagem == 'cancelada' or viagem.status_viagem == 'finalizada' %}
           <p><label>Fim Viagem: </label> {{ viagem.data_fim_viagem }}</p>
+          {%else%}
+          {%endif%}
           {% for ocorrencia in ocorrencia %}
           <p><label>Descricao Ocorrencia: </label> {{ ocorrencia.ds_ocorrencia}}</p>
           <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia}}</p>
@@ -44,6 +56,11 @@
       </div>
       {% if viagem.status_viagem == 'nao_iniciada' %}
         <a id='iniciar_viagem' href="#"><div class="ver_viagem iniciar"> Iniciar Viagem</div></a>
+        <a id='cancelar_viagem' href="/viagem/cancelar_viagem/{{viagem.cd_viagem}}"><div class="ver_viagem iniciar"> Cancelar Viagem</div></a>
+      {% else %}
+      {% endif %}
+      {% if viagem.status_viagem == 'em_andamento' %}
+        <a id='finalizar_viagem' href="#"><div class="ver_viagem iniciar"> Finalizar Viagem</div></a>
       {% else %}
       {% endif %}
       <div id="map"></div>
@@ -59,12 +76,16 @@
       function success(pos) {
         var crd = pos.coords;
         $('#iniciar_viagem').attr('href','/viagem/iniciar_viagem/{{viagem.cd_viagem}}/'+crd.latitude+'/'+crd.longitude+'/');
+        $('#finalizar_viagem').attr('href','/viagem/finalizar_viagem/{{viagem.cd_viagem}}/'+crd.latitude+'/'+crd.longitude+'/');
+        $('#loading').fadeOut(200);
         console.log(crd.latitude);
         console.log(crd.longitude);
       };
 
       function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
+        alert('Não foi possivel carregar o mapa, realizando o refresh da página')
+        location.reload();
       };
 
       navigator.geolocation.getCurrentPosition(success, error, options);

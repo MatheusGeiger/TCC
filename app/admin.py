@@ -79,8 +79,27 @@ class NotificacaoOcorrenciaAdmin(admin.ModelAdmin):
         'cd_ocorrencia'
     ]
 
+class CoordenadasVeiculoAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'cd_coordenada',
+        'latitude',
+        'longitude',
+        'porta_aberta',
+        'cd_viagem'
+    )
+    search_fields = [
+        'cd_coordenada',
+        'latitude',
+        'longitude',
+        'porta_aberta',
+        'cd_viagem'
+    ]
+
+
 admin.site.register(Veiculo, VeiculoAdmin)
 admin.site.register(Motorista, MotoristaAdmin)
 admin.site.register(Ocorrencia, OcorrenciaAdmin)
 admin.site.register(Viagem, ViagemAdmin)
+admin.site.register(CoordenadasVeiculo, CoordenadasVeiculoAdmin)
 admin.site.register(NotificacaoOcorrencia, NotificacaoOcorrenciaAdmin)
