@@ -86,23 +86,21 @@ def insere_coordenada(request,latitude,longitude,status_porta):
     except:
         return HttpResponse(status=204)
 
-    if viagem.length == 0:
-        return HttpResponse(status=204)
+    coordenada = CoordenadasVeiculo()
+    coordenada.latitude = latitude
+    coordenada.longitude = longitude
+
+    if int(status_porta) == 0:
+        coordenada.porta_aberta = False
+        coordenada.cd_viagem_id = viagem.pk
+        coordenada.save()
     else:
-        coordenada = CoordenadasVeiculo()
-        coordenada.latitude = latitude
-        coordenada.longitude = longitude
-        if int(status_porta) == 0:
-            coordenada.status_porta = 0
-            coordenada.cd_viagem = viagem.pk
-            coordenada.save()
-        else:
-            coordenada.status_porta = 1
-            coordenada.cd_viagem_id= viagem.pk
-            coordenada.save()
-            id_viagem = viagem.pk
-            insere_ocorrencia(request,id_viagem,latitude,longitude)
-        return HttpResponse(status=200)
+        coordenada.porta_aberta = True
+        coordenada.cd_viagem_id= viagem.pk
+        coordenada.save()
+        id_viagem = viagem.pk
+        insere_ocorrencia(request,id_viagem,latitude,longitude)
+    return HttpResponse(status=200)
 
 
 def viagem(request,id_viagem):
