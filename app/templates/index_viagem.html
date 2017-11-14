@@ -18,9 +18,21 @@
           <p class="warning"><label>Fim Viagem: </label>Viagem não Iniciada*</p>
           <p class="warning"><label>Status Viagem: </label>Viagem não Iniciada*</p>
           {% else %}
+          {% if viagem.origem_viagem is not none %}
           <p><label>Origem Viagem: </label> {{ viagem.origem_viagem }}</p>
+          {%else%}
+          <p><label>Origem Viagem: </label> - </p>
+          {%endif%}
+          {% if viagem.destino_viagem is not none %}
           <p><label>Destino Viagem: </label> {{ viagem.destino_viagem }}</p>
+          {%else%}
+          <p><label>Destino Viagem: </label>-</p>
+          {%endif%}
+          {% if viagem.data_inicio_viagem is not none %}
           <p><label>Inicio Viagem: </label> {{ viagem.data_inicio_viagem }}</p>
+          {%else%}
+          <p><label>Inicio Viagem: </label> - </p>
+          {%endif%}
             {% if viagem.status_viagem == 'em_andamento' %}
               <p><label>Fim Viagem: </label> - </p>
               <p class="alertviagem"><label>Status Viagem: </label> {{ viagem.status_viagem }}</p>

@@ -66,15 +66,19 @@ def finalizar_viagem(request,id_viagem,latitude,longitude):
     viagem = Viagem.objects.get(cd_viagem=id_viagem)
     destino = viagem.destino_viagem
     distancia_valida = ControlerGetDistance(destino,latitude,longitude)
-    if distancia_valida:
-        viagem.status_viagem = 'finalizada'
-        viagem.data_fim_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        viagem.save()
-        messages.success(request, 'Viagem Finalizada. ')
+    if type(distancia_valida) == str:
+        messages.error(request, 'Não foi possivel localizar o endereco de Origem')
         return HttpResponseRedirect('/viagem/%s' % id_viagem)
     else:
-        messages.error(request, 'Não foi possivel finalizar a Viagem, caminhão não chegou ao destino')
-        return HttpResponseRedirect('/viagem/%s' % id_viagem)
+        if distancia_valida:
+            viagem.status_viagem = 'finalizada'
+            viagem.data_fim_viagem = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            viagem.save()
+            messages.success(request, 'Viagem Finalizada. ')
+            return HttpResponseRedirect('/viagem/%s' % id_viagem)
+        else:
+            messages.error(request, 'Não foi possivel finalizar a Viagem, caminhão não chegou ao destino')
+            return HttpResponseRedirect('/viagem/%s' % id_viagem)
 
 def insere_coordenada(request,latitude,longitude,status_porta):
     try:
