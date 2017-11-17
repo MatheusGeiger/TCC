@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import sys
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -15,7 +16,7 @@ SECRET_KEY = 'bestsecretpassword'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEST_RUNNER = 'cargas.heroku_test_runner.HerokuDiscoverRunner'
+# TEST_RUNNER = 'cargas.heroku_test_runner.HerokuDiscoverRunner'
 
 
 # Application definition
@@ -123,10 +124,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'pt-br'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
+
+# USE_L10N = True
+# USE_TZ = True
 USE_I18N = True
-USE_L10N = True
-USE_TZ = True
 
 
 # Update database configuration with $DATABASE_URL.
@@ -158,3 +160,10 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = '/'
+
+if 'test' in sys.argv:
+
+    print 'Using in-memory DB\n'
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+    }
