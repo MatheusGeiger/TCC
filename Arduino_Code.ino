@@ -16,8 +16,8 @@ int count =0;
 
 void setup()
 {
-  GPRS.begin(9600);               // the GPRS baud rate   
-  Serial.begin(9600);             // the Serial port of Arduino baud rate.     
+  GPRS.begin(9600);               
+  Serial.begin(9600);               
   pinMode(portaStatus, INPUT);
   pinMode(ledPinGreen, OUTPUT);
   pinMode(ledPinRed, OUTPUT);
@@ -103,7 +103,7 @@ void sendSMS()
   GPRS.println("AT+CMGS=\"+5511967635977\"");
   delay(500);
   ShowSerialData();
-  GPRS.println("Temos uma ocorrencia no transporte por favor acesse: www.lit-river-31314.herokuapp.com");
+  GPRS.println("Temos uma ocorrencia no transporte por favor acesse: www.282f85fc.ngrok.io");
   delay(500);
   ShowSerialData();
   GPRS.println((char)26);
