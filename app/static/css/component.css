@@ -283,6 +283,10 @@ input.gn-search:focus {
 	content: "\e903";
 }
 
+.gn-icon-locale::before{
+	content: "\e904";
+}
+
 .gn-icon-notifica::before{
 	content: "\ea55";
 	width: auto;

@@ -191,3 +191,9 @@ def add_veiculo(request):
     else:
         return HttpResponseRedirect('/login/?next=%s' % request.path)
     return render(request, 'add.html', {'form': form})
+
+def lista_ocorrencia_map(request):
+    if request.user.is_authenticated():
+        return render(request, 'lista_map.html')
+    else:
+        return HttpResponseRedirect('/login/?next=%s' % request.path)

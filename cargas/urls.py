@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^lista_veiculo/$', app.views.lista_veiculo, name='lista_veiculo'),
     url(r'^veiculo/add_veiculo/$', app.views.add_veiculo, name='add_veiculo'),
     url(r'^lista_ocorrencia/$', app.views.lista_ocorrencia, name='lista_ocorrencia'),
+    url(r'^lista_ocorrencia/map/$', app.views.lista_ocorrencia_map, name='lista_ocorrencia_map'),
     url(r'^insere_ocorrencia/(?P<id_viagem>[.A-Za-z0-9-\/]+)/(?P<latitude>[.A-Za-z0-9-\/]+)/(?P<longitude>[.A-Za-z0-9-\/]+)/$', app.views.insere_ocorrencia, name='insere_ocorrencia'),
     url(r'^insere_coordenada/veiculo/(?P<latitude>[.A-Za-z0-9-\/]+)/(?P<longitude>[.A-Za-z0-9-\/]+)/(?P<status_porta>[.A-Za-z0-9-\/]+)/$', app.views.insere_coordenada, name='insere_coordenada'),
     url(r'^admin/', include(admin.site.urls)),

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block header %}
+  {{ block.super }}
+  <script src="/static/js/markerclusterer.js"></script>
+  <style>
+  #map{
+   height: 600px;
+   width: 100%;
+  }
+  </style>
+{% endblock %}
+{% block content %}
+{% autoescape on %}
+<div class="container-full">
+      <div id="map"></div>
+</div>
+<script>
+  function initMap() {
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {lat:-23.523480, lng:-46.546344}
+      });
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var markers = locations.map(function(location, i) {
+        return new google.maps.Marker({
+          position: location,
+          label: labels[i % labels.length]
+        });
+      });
+
+      var markerCluster = new MarkerClusterer(map, markers,
+          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+    var locations = [
+      {lat: -23.523480, lng: -46.546344},
+      {lat:-23.523992, lng: -46.545990},
+      {lat:-23.522152, lng: -46.547041},
+      {lat:-23.522806, lng: -46.548511},
+      {lat:-23.557308, lng:-46.572629},
+      {lat:-23.559532, lng:-46.570943},
+      {lat:-23.559453, lng:-46.573389},
+      {lat:-23.559374, lng:-46.577133},
+      {lat:-23.560357, lng:-46.580459},
+      {lat:-23.561793, lng:-46.582025},
+      {lat:-23.571099, lng:-46.550045},
+      {lat:-23.574334, lng:-46.553221}
+    ]
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC4a11g-stHdlMa7F89GlytBEWQ09Ww_o&callback=initMap">
+  </script>
+{% endautoescape %}
+{% endblock %}

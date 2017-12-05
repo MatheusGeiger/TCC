@@ -56,11 +56,15 @@
           {%else%}
           {%endif%}
           {% for ocorrencia in ocorrencia %}
-          <p><label>Descricao Ocorrencia: </label> {{ ocorrencia.ds_ocorrencia}}</p>
-          <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia}}</p>
-          <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia}}</p>
+          <hr>
+          <div class="ocorrencia">
+            <p><label>Descricao Ocorrencia: </label> {{ ocorrencia.ds_ocorrencia}}</p>
+            <p><label>Local Ocorrencia: </label> {{ ocorrencia.local_ocorrencia}}</p>
+            <p><label>Data Ocorrencia: </label> {{ ocorrencia.data_ocorrencia}}</p>
+          </div>
           {% endfor %}
           {% endif %}
+          <hr>
       </div>
       {% if viagem.status_viagem == 'nao_iniciada' %}
         <a id='iniciar_viagem' href="#"><div class="ver_viagem iniciar"> Iniciar Viagem</div></a>
