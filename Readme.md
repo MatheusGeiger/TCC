@@ -13,3 +13,4 @@ Projeto de Tcc
     AT+HTTPPARA="CID",1 <br />
     AT+HTTPPARA="URL","https://lit-river-31314.herokuapp.com/insere_coordenada/veiculo/-23.515768/-46.543343/0/" <br />
     AT+HTTPACTION=1
+
